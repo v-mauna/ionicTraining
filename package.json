@@ -7,6 +7,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:ci":  "export CI=true; react-scripts test",
+    "test:cov": "export CI=true; react-scripts-test --coverage",
+    "test:upd": "export CI=true; react-scripts test --updateSnapshot",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
