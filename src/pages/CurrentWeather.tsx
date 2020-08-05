@@ -13,7 +13,7 @@ const CurrentWeather: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
+        <IonToolbar color="primary">
           <IonTitle>Current Weather</IonTitle>
         </IonToolbar>
       </IonHeader>

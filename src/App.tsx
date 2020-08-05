@@ -33,6 +33,7 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import './theme/styles.css';
 
 const App: React.FC = () => (
   <IonApp>
@@ -44,7 +45,7 @@ const App: React.FC = () => (
           <Route path="/uv-index" component={UVIndex} />
           <Route path="/" render={() => <Redirect to="/current-weather" />} exact={true} />
         </IonRouterOutlet>
-        <IonTabBar slot="bottom">
+        <IonTabBar color="primary" slot="bottom">
           <IonTabButton tab="current-weather" href="/current-weather">
             <IonIcon icon={triangle} />
             <IonLabel>Current Weather</IonLabel>

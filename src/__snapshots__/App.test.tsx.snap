@@ -17,6 +17,7 @@ exports[`renders consistently 1`] = `
           <ion-router-outlet />
         </div>
         <ion-tab-bar
+          color="primary"
           selected-tab="current-weather"
           slot="bottom"
         >
