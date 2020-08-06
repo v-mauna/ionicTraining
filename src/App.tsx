@@ -10,7 +10,7 @@ import {
   IonTabs,
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle } from 'ionicons/icons';
+import {sunny, cloud, calendar} from 'ionicons/icons'
 import CurrentWeather from './pages/CurrentWeather';
 import Forecast from './pages/Forecast';
 import UVIndex from './pages/UV-Index';
@@ -47,15 +47,15 @@ const App: React.FC = () => (
         </IonRouterOutlet>
         <IonTabBar color="primary" slot="bottom">
           <IonTabButton tab="current-weather" href="/current-weather">
-            <IonIcon icon={triangle} />
+            <IonIcon icon={cloud} />
             <IonLabel>Current Weather</IonLabel>
           </IonTabButton>
           <IonTabButton tab="forecast" href="/forecast">
-            <IonIcon icon={ellipse} />
+            <IonIcon icon={calendar} />
             <IonLabel>Forecast</IonLabel>
           </IonTabButton>
           <IonTabButton tab="uv-index" href="/uv-index">
-            <IonIcon icon={square} />
+            <IonIcon icon={sunny} />
             <IonLabel>UV Index</IonLabel>
           </IonTabButton>
         </IonTabBar>

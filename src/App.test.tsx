@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import App from './App';
+import { weather } from './util';
 
 it('renders without crashing', () => {
   const { baseElement } = render(<App />);
@@ -27,4 +28,15 @@ it('renders consistently', () => {
 });
 
 
+let spy: any;
+beforeAll(() => {
+  spy = jest.spyOn(weather, 'current').mockImplementation(() =>
+      Promise.resolve({
+        temperature: 280.32,
+        condition: 300,
+        date: new Date(1485789600 * 1000),
+      } as any),
+  );
+});
 
+afterAll(() => spy.mockReset());

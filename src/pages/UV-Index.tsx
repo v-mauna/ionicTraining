@@ -1,15 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   IonContent,
   IonHeader,
   IonPage,
   IonTitle,
-  IonToolbar,
+  IonToolbar, useIonViewWillEnter,
 } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
+
 import './uvIndex.css';
+import {weather} from "../util";
 
 const UVIndex: React.FC = () => {
+  const [uvIndex, setUVIndex] = useState<number>()
+  const [riskLevel, setRiskLevel] = useState<number>( 0 );
+  const descriptionStyle = {
+    marginTop: '16px'
+  }
+  const advice: Array<string> = [
+    'Wear sunglasses on bright days. If you burn easily, cover up and use broad spectrum SPF 30+ sunscreen. ' +
+    'Bright surfaces, such as sand, water and snow, will increase UV exposure.',
+    'Stay in the shade near midday when the sun is strongest. If outdoors, wear sun protective clothing, ' +
+    'a wide-brimmed hat, and UV-blocking sunglasses. Generously apply broad spectrum SPF 30+ sunscreen every 2 hours, ' +
+    'even on cloudy days, and after swimming or sweating. Bright surfaces, such as sand, water and snow, ' +
+    'will increase UV exposure.',
+    'Reduce time in the sun between 10 a.m. and 4 p.m. If outdoors, seek shade and wear sun protective clothing, ' +
+    'a wide-brimmed hat, and UV-blocking sunglasses. Generously apply broad spectrum SPF 30+ sunscreen every 2 hours, ' +
+    'even on cloudy days, and after swimming or sweating. Bright surfaces, such sand, water and snow, ' +
+    'will increase UV exposure.',
+    'Minimize sun exposure between 10 a.m. and 4 p.m. If outdoors, seek shade and wear sun protective clothing, ' +
+    'a wide-brimmed hat, and UV-blocking sunglasses. Generously apply broad spectrum SPF 30+ sunscreen every 2 hours, ' +
+    'even on cloudy days, and after swimming or sweating. Bright surfaces, such as sand, water and snow, ' +
+    'will increase UV exposure.',
+    'Try to avoid sun exposure between 10 a.m. and 4 p.m. If outdoors, seek shade and wear sun protective clothing, ' +
+    'a wide-brimmed hat, and UV-blocking sunglasses. Generously apply broad spectrum SPF 30+ sunscreen every 2 hours, ' +
+    'even on cloudy days, and after swimming or sweating. Bright surfaces, such as sand, water and snow, ' +
+    'will increase UV exposure.',
+  ];
+  useIonViewWillEnter(async ()=> {
+    const res = await weather.uvIndex();
+    setUVIndex(res.value);
+    setRiskLevel(res.riskLevel)
+  });
+
   return (
     <IonPage>
       <IonHeader>
@@ -17,13 +49,9 @@ const UVIndex: React.FC = () => {
           <IonTitle>UV Index</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">UV Index</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <ExploreContainer name="Tab 3 page" />
+      <IonContent className="ion-padding ion-text-center">
+        <kws-uv-index class="primary-value" uv-index={uvIndex}></kws-uv-index>
+        <div className="description" style={descriptionStyle}>{advice[riskLevel]}</div>
       </IonContent>
     </IonPage>
   );
