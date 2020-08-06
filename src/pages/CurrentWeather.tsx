@@ -1,27 +1,31 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   IonContent,
   IonHeader,
+  IonLoading,
   IonPage,
   IonTitle,
   IonToolbar,
-  useIonViewWillEnter
+  useIonViewWillEnter,
 } from '@ionic/react';
 import { iconPaths, weather } from '../util';
 
 const CurrentWeather: React.FC = () => {
   const [temperature, setTemperature] = useState<number>();
   const [condition, setCondition] = useState<number>();
+  const [loading, setLoading] = useState(false);
 
   const ref = useRef(null);
-  useEffect(()=>{
+  useEffect(() => {
     (ref.current as any)!.iconPaths = iconPaths;
   });
 
-  useIonViewWillEnter(async ()=> {
+  useIonViewWillEnter(async () => {
+    setLoading(true);
     const res = await weather.current();
     setTemperature(res.temperature);
     setCondition(res.condition);
+    setLoading(false);
   });
 
   return (
@@ -31,9 +35,14 @@ const CurrentWeather: React.FC = () => {
           <IonTitle>Current Weather</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent className="ion-text-center ion-padding" >
+      <IonContent className="ion-text-center ion-padding">
+        <IonLoading message="Loading Current Weather" isOpen={loading} />
         <div className="information">
-          <kws-temperature class="primary-value" scale="F" temperature={temperature}/>
+          <kws-temperature
+            class="primary-value"
+            scale="F"
+            temperature={temperature}
+          />
         </div>
         <kws-condition condition={condition} ref={ref} />
       </IonContent>

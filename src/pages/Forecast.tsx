@@ -5,6 +5,7 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
+    IonLoading,
     IonList,
     IonItem,
     useIonViewWillEnter
@@ -17,10 +18,13 @@ import {  weather } from '../util';
 
 const Forecast: React.FC = () => {
   const [forecast, setForecast] = useState<WeeklyForecast>([]);
+  const [loading, setLoading] = useState(false);
 
   useIonViewWillEnter(async ()=> {
+    setLoading(true)
     const res = await weather.forecast();
     setForecast(res)
+    setLoading(false)
   });
 
 
@@ -32,6 +36,7 @@ const Forecast: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-text-center ion-padding">
+        <IonLoading message="Forecast is loading" isOpen={loading}/>
         <IonList>
           {forecast.map((f, index) => (
               <IonItem key={index}>
