@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Weather Sharer</string>
+    <string name="title_activity_main">Weather Sharer</string>
+    <string name="package_name">com.vanessamauna.weatherSharer</string>
+    <string name="custom_url_scheme">com.vanessamauna.weatherSharer</string>
+</resources>
